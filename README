@@ -1,0 +1,21 @@
+myip
+====
+myip is a client and server, to figure out your public IP address.
+
+To build it just run: go build
+
+To secure the connection between the cilent and server, as well as restrict
+access, the communication is secured using mTLS.
+
+Therefore you have to create a TLS certificate for the server and the client.
+This can be done using openssl or the tools form smallstep (e.g. step).
+
+Here is some hint how you can create self sign certificates for the
+server/client. Password protected certificates are not supported.
+
+step ca init
+
+step certificate create localhost server.crt server.key --profile leaf \
+--ca ../certs/root_ca.crt --ca-key ../secrets/root_ca_key \
+--no-password --insecure
+
