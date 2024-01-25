@@ -14,9 +14,9 @@ import (
 )
 
 type ClientConfig struct {
-	RootCA    string `json:"CaCertPath"`
-	CLientCrt string `json:"CertFile"`
-	ClientKey string `json:"KeyFile"`
+	RootCA    string `json:"RootCA"`
+	CLientCrt string `json:"CLientCrt"`
+	ClientKey string `json:"ClientKey"`
 	Port      uint16 `json:"Port"`
 	Server    string `json:"Server"`
 }
