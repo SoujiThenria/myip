@@ -13,7 +13,7 @@ func Execute() {
 	cobra.OnInitialize(initConfig)
 
 	rootCmd := newClientCommand()
-	rootCmd.Version = "1.0.0"
+	rootCmd.Version = "1.1.2"
 
 	rootCmd.AddCommand(newServerCommand())
 
