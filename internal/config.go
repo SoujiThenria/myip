@@ -4,13 +4,10 @@ import (
 	"encoding/json"
 	"os"
 	"strconv"
-	"strings"
 )
 
 func ReadConfig(Path string, cc interface{}) error {
-	envPath := os.Getenv("HOME")
-	Path = strings.ReplaceAll(Path, "$HOME", envPath)
-	fb, err := os.ReadFile(Path)
+	fb, err := os.ReadFile(os.ExpandEnv(Path))
 	if err != nil {
 		return err
 	}
