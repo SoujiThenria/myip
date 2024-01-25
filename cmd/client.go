@@ -5,10 +5,10 @@ import (
 	"crypto/x509"
 	"fmt"
 	"io"
-	"myip/internal"
 	"net/http"
 	"os"
 
+	"github.com/SoujiThenria/myip/internal"
 	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 )

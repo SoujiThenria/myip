@@ -3,11 +3,11 @@ package cmd
 import (
 	"crypto/tls"
 	"crypto/x509"
-	"myip/internal"
 	"net/http"
 	"os"
 	"strings"
 
+	"github.com/SoujiThenria/myip/internal"
 	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 )

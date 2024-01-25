@@ -1,4 +1,4 @@
-module myip
+module github.com/SoujiThenria/myip
 
 go 1.21.5
 

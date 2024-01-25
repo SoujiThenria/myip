@@ -1,6 +1,6 @@
 package main
 
-import "myip/cmd"
+import "github.com/SoujiThenria/myip/cmd"
 
 func main() {
 	cmd.Execute()
