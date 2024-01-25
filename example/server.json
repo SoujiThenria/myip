@@ -1,0 +1,7 @@
+{
+    "RootCA": "/usr/local/etc/ssl/server.crt",
+    "ServerCrt": "/usr/local/etc/myip/server.crt",
+    "ServerKey": "/usr/local/etc/myip/server.key",
+    "Port": 443,
+    "Listen": "0.0.0.0"
+}
