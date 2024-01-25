@@ -68,7 +68,7 @@ func client(c *ClientConfig) {
 	}
 
 	client := &http.Client{
-        Timeout: 3 * time.Second,
+		Timeout: 3 * time.Second,
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
 				RootCAs:      caCertPool,
