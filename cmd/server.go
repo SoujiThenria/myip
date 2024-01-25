@@ -34,7 +34,7 @@ func newServerCommand() *cobra.Command {
 		Short: "The server side of the myip utility",
 		Run: func(cmd *cobra.Command, args []string) {
 			if err := internal.ReadConfig(confPath, opts); err != nil {
-				log.Warn("Failed to read configuration file; use default values", "error", err)
+				log.Debug("No config file found", "error", err)
 			}
 			server(opts)
 		},
