@@ -20,7 +20,6 @@ var (
         Short: "The client side of the myip utility",
         Version: "0.1-beta",
         Run: func(cmd *cobra.Command, args []string) {
-            log.Info("Start client")
             client(c)
         },
     }

@@ -25,7 +25,6 @@ func newServerCommand() *cobra.Command {
         Use:   "server",
         Short: "The server side of the myip utility",
         Run: func(cmd *cobra.Command, args []string) {
-            log.Info("Start the server")
             server(opts)
         },
     }
