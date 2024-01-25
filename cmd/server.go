@@ -3,6 +3,7 @@ package cmd
 import (
 	"crypto/tls"
 	"crypto/x509"
+	"myip/internal"
 	"net/http"
 	"os"
 	"strings"
@@ -12,30 +13,41 @@ import (
 )
 
 type ServerOptions struct {
-    RootCA string
-    ServerCrt string
-    ServerKey string
-    Port uint16
-    Listen string
+	RootCA    string `json:"RootCA"`
+	ServerCrt string `json:"ServerCrt"`
+	ServerKey string `json:"ServerKey"`
+	Port      uint16 `json:"Port"`
+	Listen    string `json:"Listen"`
 }
 
 func newServerCommand() *cobra.Command {
-    opts := new(ServerOptions)
-    serverCmd := &cobra.Command{
-        Use:   "server",
-        Short: "The server side of the myip utility",
-        Run: func(cmd *cobra.Command, args []string) {
-            server(opts)
-        },
-    }
+	confPath := "/usr/local/etc/myip/conf.json"
+	opts := &ServerOptions{
+		RootCA:    "/usr/local/etc/ssl/server.crt",
+		ServerCrt: "/usr/local/etc/myip/server.crt",
+		ServerKey: "/usr/local/etc/myip/server.key",
+		Port:      443,
+		Listen:    "0.0.0.0",
+	}
+	serverCmd := &cobra.Command{
+		Use:   "server",
+		Short: "The server side of the myip utility",
+		Run: func(cmd *cobra.Command, args []string) {
+			if err := internal.ReadConfig(confPath, opts); err != nil {
+				log.Warn("Failed to read configuration file; use default values", "error", err)
+			}
+			server(opts)
+		},
+	}
 
-    serverCmd.Flags().StringVar(&opts.RootCA, "ca", "/etc/ssl/server.crt", "Certificate of the root CA")
-    serverCmd.Flags().StringVar(&opts.ServerCrt, "crt", "/usr/local/etc/myip/server.crt", "Client certificate")
-    serverCmd.Flags().StringVar(&opts.ServerKey, "key", "/usr/local/etc/myip/server.key", "Client key")
-    serverCmd.Flags().StringVar(&opts.Listen, "listen", "0.0.0.0", "The address the server binds on")
-    serverCmd.Flags().Uint16Var(&opts.Port, "port", 443, "The port to use")
+	serverCmd.Flags().StringVar(&opts.RootCA, "ca", opts.RootCA, "Certificate of the root CA")
+	serverCmd.Flags().StringVar(&opts.ServerCrt, "crt", opts.ServerCrt, "Client certificate")
+	serverCmd.Flags().StringVar(&opts.ServerKey, "key", opts.ServerKey, "Client key")
+	serverCmd.Flags().StringVar(&opts.Listen, "listen", opts.Listen, "The address the server binds on")
+	serverCmd.Flags().Uint16Var(&opts.Port, "port", opts.Port, "The port to use")
+	serverCmd.Flags().StringVarP(&confPath, "config", "c", confPath, "The path to the config file")
 
-    return serverCmd
+	return serverCmd
 }
 
 func server(c *ServerOptions) {
@@ -54,7 +66,7 @@ func server(c *ServerOptions) {
 	}
 
 	server := &http.Server{
-		Addr:      buildAddress(c.Listen, c.Port),
+		Addr:      internal.BuildAddress(c.Listen, c.Port),
 		TLSConfig: tlsConfig,
 	}
 
