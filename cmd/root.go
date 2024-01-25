@@ -4,7 +4,7 @@ import "github.com/charmbracelet/log"
 
 func Execute() {
 	rootCmd := newClientCommand()
-	rootCmd.Version = "0.3-BETA"
+	rootCmd.Version = "1.0.0"
 
 	rootCmd.AddCommand(newServerCommand())
 
