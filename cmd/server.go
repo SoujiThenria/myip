@@ -61,7 +61,7 @@ func server(c *ServerOptions) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		clientAddress := r.RemoteAddr
-		log.Info("New connection", "client", clientAddress)
+		log.Info("New connection", "address", clientAddress, "CN", r.TLS.PeerCertificates[0].Subject)
 		w.Write([]byte(clientAddress[:strings.LastIndex(clientAddress, ":")]))
 	})
 
