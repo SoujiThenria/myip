@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/SoujiThenria/myip/internal"
 	"github.com/charmbracelet/log"
@@ -67,6 +68,7 @@ func client(c *ClientConfig) {
 	}
 
 	client := &http.Client{
+        Timeout: 3 * time.Second,
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
 				RootCAs:      caCertPool,
