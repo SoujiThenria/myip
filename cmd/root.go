@@ -93,10 +93,3 @@ func client(c *ClientConfig) {
 func buildAddress(server string, port uint16) string {
 	return server + ":" + strconv.Itoa(int(port))
 }
-
-func getFlag(flag string, err error) string {
-    if err != nil {
-        log.Fatal(err)
-    }
-    return flag
-}
