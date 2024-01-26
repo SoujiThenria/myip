@@ -3,7 +3,7 @@ BINNAME = myip
 TIME = $(shell date)
 USER = $(shell id -u -n)@$(shell hostname)
 VERSIONPATH = github.com/SoujiThenria/myip/cmd.Version
-VERSION = v1.1.2
+VERSION = v1.1.3
 
 all: vet fmt
 	go build -ldflags="-s -w -X '${VERSIONPATH}=${VERSION} by ${USER} at ${TIME}'"
