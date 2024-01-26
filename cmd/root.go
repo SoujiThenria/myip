@@ -7,13 +7,14 @@ import (
 
 var (
 	logLevel = "INFO"
+    Version = "development"
 )
 
 func Execute() {
 	cobra.OnInitialize(initConfig)
 
 	rootCmd := newClientCommand()
-	rootCmd.Version = "1.1.2"
+	rootCmd.Version = Version
 
 	rootCmd.AddCommand(newServerCommand())
 
